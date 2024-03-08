@@ -3,12 +3,10 @@ package leaves
 import (
 	"bufio"
 	"fmt"
-	"math"
-	"os"
-
 	"github.com/dmitryikh/leaves/internal/xgbin"
 	"github.com/dmitryikh/leaves/internal/xgjson"
 	"github.com/dmitryikh/leaves/transformation"
+	"math"
 )
 
 func xgSplitIndex(origNode *xgbin.Node) uint32 {
@@ -252,15 +250,8 @@ func XGEnsembleFromFile(filename string, loadTransformation bool) (*Ensemble, er
 	if ensemble, err := xgEnsembleFromJsonFile(filename, loadTransformation); err == nil {
 		return ensemble, nil
 	} else {
-		panic(err)
-	}
-	reader, err := os.Open(filename)
-	if err != nil {
 		return nil, err
 	}
-	defer reader.Close()
-	bufReader := bufio.NewReader(reader)
-	return XGEnsembleFromReader(bufReader, loadTransformation)
 }
 
 func xgEnsembleFromJsonFile(filename string, loadTransformation bool) (*Ensemble, error) {
